@@ -72,6 +72,16 @@ app.get("/mobiles",function(req,res,next){
   });
 })
 
+app.get("/mobile/:name",function(req,res,next){
+  console.log("Inside get /mobile/:name ")
+  let name = req.params.name;
+  const query = `SELECT * FROM mobiles WHERE name=$1`;
+  client.query(query,[name],function(err,result){
+    if(err) res.status(440).send(err);
+    else res.send(result.rows);
+  })
+})
+
 
 //This method is used to add a mobile in the database.
 
